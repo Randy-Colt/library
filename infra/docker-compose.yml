@@ -1,0 +1,24 @@
+version: '3.3'
+
+volumes:
+  pg_data:
+
+services:
+
+  db:
+    container_name: db
+    image: postgres:13.10
+    env_file: .env_example
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    container_name: backend
+    build: ./
+    env_file: .env_example
+    volumes:
+      - pg_data
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
