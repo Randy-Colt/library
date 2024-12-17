@@ -1,0 +1,11 @@
+services:
+
+  backend:
+    container_name: backend
+    build: ./
+    env_file: .env_example
+    command: python main.py
+    volumes:
+      - ./data:/data
+    ports:
+      - 8000:8000
